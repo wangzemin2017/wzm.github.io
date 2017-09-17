@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myresume</title>
+	<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+	<div class="container" id="box">
+		<div class="page">1</div>
+		<div class="page">2</div>
+		<div class="page">3</div>
+		<div class="page">4</div>
+		<div class="page">5</div>
+	</div>
+	<div class="btn" id="btn">
+		<a href="javascript:;" class="btn-left">&lt;</a>
+		<a href="javascript:;" class="btn-right">&gt;</a>
+	</div>
+	<script>
+		var box = document.getElementById('box');
+		var divs = box.children;
+		var btns = document.getElementById('btn');
+		var btn = btns.children;
+		var styleList = [
+		{
+			"width": "70%",
+			"height": "80%",
+			"left": "15%",
+			"top": "18%",
+			"backgroundColor": "pink",
+			"opacity": 1,
+			"z-index": 1
+		},
+		{
+			"width": "40%",
+			"height": "50%",
+			"right": "5%",
+			"top": "10%",
+			"backgroundColor": "lightblue",
+			"opacity": 0.5,
+			"z-index": 0
+		},
+		{
+			"width": "20%",
+			"height": "25%",
+			"right": "20%",
+			"top": "2%",
+			"backgroundColor": "lightgreen",
+			"opacity": 0.2,
+			"z-index": -1
+		},
+		{
+			"width": "20%",
+			"height": "25%",
+			"left": "20%",
+			"top": "2%",
+			"backgroundColor": "orange",
+			"opacity": 0.2,
+			"z-index": -1
+		},
+		{
+			"width": "40%",
+			"height": "50%",
+			"left": "5%",
+			"top": "10%",
+			"backgroundColor": "purple",
+			"opacity": 0.5,
+			"z-index": 0
+		}];
+		for(var i=0; i<5; i++){
+			for(var k in styleList[i]){
+				divs[i].style[k] = styleList[i][k];
+			}
+		}
+		btn[0].addEventListener('click', function(){
+			for(var i=0; i<5; i++){
+				for(var k in styleList[i]){
+					divs[i].style[k] = '';
+				}
+			}
+
+			styleList.push(styleList.shift());
+			for(var i=0; i<5; i++){
+				for(var k in styleList[i]){
+					divs[i].style[k] = styleList[i][k];
+				}
+			}
+		});
+		btn[1].addEventListener('click', function(){
+			for(var i=0; i<5; i++){
+				for(var k in styleList[i]){
+					divs[i].style[k] = '';
+				}
+			}
+
+			styleList.unshift(styleList.pop());
+			for(var i=0; i<5; i++){
+				for(var k in styleList[i]){
+					divs[i].style[k] = styleList[i][k];
+				}
+			}
+		});
+	</script>
+</body>
+</html>
