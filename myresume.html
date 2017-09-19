@@ -35,7 +35,7 @@
 		{
 			"width": "40%",
 			"height": "50%",
-			"right": "5%",
+			"left": "55%",
 			"top": "10%",
 			"backgroundColor": "lightblue",
 			"opacity": 0.5,
@@ -44,7 +44,7 @@
 		{
 			"width": "20%",
 			"height": "25%",
-			"right": "20%",
+			"left": "60%",
 			"top": "2%",
 			"backgroundColor": "lightgreen",
 			"opacity": 0.2,
@@ -74,12 +74,6 @@
 			}
 		}
 		btn[0].addEventListener('click', function(){
-			for(var i=0; i<5; i++){
-				for(var k in styleList[i]){
-					divs[i].style[k] = '';
-				}
-			}
-
 			styleList.push(styleList.shift());
 			for(var i=0; i<5; i++){
 				for(var k in styleList[i]){
@@ -88,12 +82,6 @@
 			}
 		});
 		btn[1].addEventListener('click', function(){
-			for(var i=0; i<5; i++){
-				for(var k in styleList[i]){
-					divs[i].style[k] = '';
-				}
-			}
-
 			styleList.unshift(styleList.pop());
 			for(var i=0; i<5; i++){
 				for(var k in styleList[i]){
@@ -101,6 +89,25 @@
 				}
 			}
 		});
+		function setStyle(obj, attr, value){
+			var nowVal = parseInt(getStyle(obj, attr));
+			var step = (value - nowVal) / 10;
+			step = step ? Math.ceil(step) : Math.floor(step);
+			obj.timer = setInterval(function(){
+				nowVal = nowVal + step;
+				obj.style[attr] = nowVal + 'px';
+				if(value == nowVal){
+					clearInterval(obj.timer);
+				}
+			}, 30);
+		}
+		function getStyle(obj, attr){
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}else{
+				return window.getComputedStyle(obj,null)[attr];
+			}
+		}
 	</script>
 </body>
 </html>
